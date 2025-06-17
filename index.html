@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasya S - COOK 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com "></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1abc9c',     // Tosca utama
+            secondary: '#d1f2eb',   // Tosca muda
+            accent: '#16a085',      // Tosca tua
+            dark: '#2c3e50',        // Teks gelap
+            light: '#ecf0f1',       // Background abu muda
+            graytext: '#7f8c8d'     // Teks abu-abu
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ecf0f1;
+      color: #2c3e50;
+    }
+    .section-padding {
+      padding: 5rem 2rem;
+    }
+    .portfolio-item {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: white;
+      border: 1px solid rgba(26, 188, 156, 0.2);
+    }
+    .portfolio-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(26, 188, 156, 0.2);
+    }
+    .timeline-item:before {
+      background: #1abc9c;
+    }
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      background-color: white;
+    }
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes pulse-primary {
+      0% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(26, 188, 156, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0); }
+    }
+    .pulse-primary {
+      animation: pulse-primary 2s infinite;
+    }
+    .card {
+      background-color: white;
+      border: 1px solid rgba(26, 188, 156, 0.2);
+      border-radius: 0.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    .progress-bar {
+      background-color: #1abc9c;
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: #1abc9c;
+      border-radius: 3px;
+    }
+    .timeline-dot {
+      background-color: #1abc9c;
+      border: 3px solid white;
+    }
+    input, textarea {
+      background-color: white;
+      border: 1px solid #ddd;
+      color: #2c3e50;
+    }
+    input:focus, textarea:focus {
+      border-color: #1abc9c;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+    }
+    ::placeholder {
+      color: #95a5a6;
+    }
+    .bg-gradient-tosca {
+      background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+    }
+  </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+  <!-- Navbar -->
+  <header class="bg-white shadow fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <h1 class="text-2xl font-display text-primary font-bold">Tasya</h1>
+      <nav class="hidden md:flex gap-8 font-medium">
+        <a href="#home" class="hover:text-primary transition">Home</a>
+        <a href="#about" class="hover:text-primary transition">Tentang Saya</a>
+        <a href="#skills" class="hover:text-primary transition">Keahlian</a>
+        <a href="#portfolio" class="hover:text-primary transition">Portfolio</a>
+        <a href="#experience" class="hover:text-primary transition">Pengalaman</a>
+        <a href="#contact" class="hover:text-primary transition">Kontak</a>
+      </nav>
+      <button id="mobile-menu-button" class="md:hidden text-primary text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-full shadow-lg z-40">
+      <div class="flex flex-col py-8">
+        <a href="#home" class="px-6 py-3 hover:bg-secondary hover:text-primary">Home</a>
+        <a href="#about" class="px-6 py-3 hover:bg-secondary hover:text-primary">Tentang Saya</a>
+        <a href="#skills" class="px-6 py-3 hover:bg-secondary hover:text-primary">Keahlian</a>
+        <a href="#portfolio" class="px-6 py-3 hover:bg-secondary hover:text-primary">Portfolio</a>
+        <a href="#experience" class="px-6 py-3 hover:bg-secondary hover:text-primary">Pengalaman</a>
+        <a href="#contact" class="px-6 py-3 hover:bg-secondary hover:text-primary">Kontak</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-32 pb-20 px-6 bg-gradient-tosca">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2 space-y-6 text-white">
+        <h1 class="text-4xl md:text-5xl font-display font-bold leading-tight">TASYA S</h1>
+        <h2 class="text-white text-opacity-90 text-lg tracking-wide uppercase font-semibold">COOK 3</h2>
+        <p class="text-white text-opacity-90 text-lg leading-relaxed">Profesional berpengalaman di bidang CATERING SERVICES terbiasa bekerja cepat, tepat, dan multitasking dari dapur hingga kode program</p>
+        <div class="flex gap-4">
+          <a href="#portfolio" class="inline-block bg-white text-primary font-semibold px-6 py-3 rounded-full shadow hover:bg-transparent hover:text-white hover:ring-2 hover:ring-white transition pulse-primary">Lihat Portfolio</a>
+          <a href="#contact" class="inline-block bg-transparent text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-white hover:text-primary transition ring-2 ring-white">Hubungi Saya</a>
+        </div>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <div class="relative">
+          <img src="can.jpg" alt="Tasya S" class="w-80 h-80 object-cover rounded-full border-8 border-white shadow-xl floating" />
+          <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-lg shadow-lg ring-2 ring-primary">
+            <p class="font-bold text-primary">CATERING SERVICES</p>
+            <p class="text-sm text-graytext">Professional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section-padding bg-light">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-display text-primary font-bold mb-4 section-title">Tentang Saya</h2>
+      </div>
+      
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <div class="md:w-2/5">
+          <div class="card overflow-hidden">
+            <img src="tasya.jpg" alt="Tentang Tasya" class="w-full rounded-t-xl">
+            <div class="p-6">
+              <div class="flex justify-center space-x-4 mt-4">
+                <div class="text-center">
+                  <p class="text-primary font-bold">2+ Tahun</p>
+                  <p class="text-graytext text-sm">Pengalaman</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-primary font-bold">98%</p>
+                  <p class="text-graytext text-sm">Kepuasan Pelanggan</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-primary font-bold">35+</p>
+                  <p class="text-graytext text-sm">Anggota Tim</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:w-3/5">
+          <h3 class="text-2xl font-display text-primary mb-4">Profil Saya</h3>
+          <p class="text-graytext mb-6 leading-relaxed">
+            Saya adalah profesional di bidang CATERING SERVICES dengan pengalaman sebagai Cook 3. Saya memiliki kemampuan bekerja cepat, tepat, dan multitasking dari dapur hingga pengembangan sistem.
+          </p>
+          <p class="text-graytext mb-6 leading-relaxed">
+            Selain di bidang kuliner, saya juga memiliki minat di bidang teknologi dan sedang menempuh pendidikan di bidang Teknologi Informatika. Saya dikenal sebagai pribadi yang kreatif, komunikatif, dan mampu memimpin tim.
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="font-semibold text-primary">Nama Lengkap:</p>
+              <p class="text-graytext">Tasya S</p>
+            </div>
+            <div>
+              <p class="font-semibold text-primary">Pendidikan:</p>
+              <p class="text-graytext">Teknologi Informatika</p>
+            </div>
+            <div>
+              <p class="font-semibold text-primary">Email:</p>
+              <p class="text-graytext">tasyazesica05@gmail.com</p>
+            </div>
+            <div>
+              <p class="font-semibold text-primary">Lokasi:</p>
+              <p class="text-graytext">Bekasi, Indonesia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-display text-primary font-bold mb-4 section-title">Keahlian Saya</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="card p-6">
+          <h3 class="text-xl font-semibold mb-4 text-primary">Profesional</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Komunikasi</span>
+                <span class="text-primary">100%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Kepemimpinan</span>
+                <span class="text-primary">90%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Layanan Pelanggan</span>
+                <span class="text-primary">100%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Penyelesaian Masalah</span>
+                <span class="text-primary">100%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card p-6">
+          <h3 class="text-xl font-semibold mb-4 text-primary">Lainnya</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Manajemen Waktu</span>
+                <span class="text-primary">100%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Bahasa Inggris</span>
+                <span class="text-primary">80%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Manajemen Dapur</span>
+                <span class="text-primary">95%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-graytext">Pengembangan Menu</span>
+                <span class="text-primary">90%</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full">
+                <div class="h-2 progress-bar rounded-full" style="width:90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="section-padding bg-light">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-display text-primary font-bold mb-4 section-title">Portfolio Saya</h2>
+        <p class="text-graytext max-w-2xl mx-auto mt-4">Berikut adalah beberapa proyek dan pencapaian saya</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="portfolio-item rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Project E-commerce" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 text-primary">Project E-commerce</h3>
+            <p class="text-graytext mb-4">Pengembangan platform e-commerce untuk bisnis kuliner.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">Web Development</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">UI/UX</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">E-commerce</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden">
+          <!-- Gambar sistem restoran yang lebih reliable -->
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Sistem Pelayanan Restoran" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 text-primary">Sistem Pelayanan Restoran</h3>
+            <p class="text-graytext mb-4">Mengembangkan sistem terpadu untuk meningkatkan efisiensi operasional restoran.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">Management</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">System Design</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">F&B</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Sitemu App" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 text-primary">Sitemu App</h3>
+            <p class="text-graytext mb-4">Aplikasi pertemuan komunitas untuk menghubungkan pecinta kuliner.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">App Development</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">Community</span>
+              <span class="bg-secondary text-primary px-3 py-1 rounded-full text-sm">UI Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-display text-primary font-bold mb-4 section-title">Pengalaman</h2>
+        <p class="text-graytext max-w-2xl mx-auto mt-4">Riwayat pendidikan dan pengalaman kerja saya</p>
+      </div>
+      
+      <div class="relative">
+        <!-- Timeline -->
+        <div class="space-y-12 pl-8 border-l-2 border-primary">
+          <div class="relative pl-8">
+            <div class="absolute -left-4 top-0 w-8 h-8 rounded-full timeline-dot"></div>
+            <div class="card p-6">
+              <div class="flex justify-between flex-wrap">
+                <h3 class="text-xl font-semibold text-primary">Staff Cook 3</h3>
+                <span class="text-accent font-medium">Des 2022 - Sekarang</span>
+              </div>
+              <p class="text-graytext font-semibold mb-2">Restoran Premium</p>
+              <p class="text-graytext">
+                Memimpin tim pelayanan beranggotakan 35 karyawan dengan tingkat kepuasan pelanggan 98%. Mengembangkan sistem pelayanan terpadu dan berkolaborasi dengan chef untuk menciptakan pengalaman kuliner yang memorable.
+              </p>
+            </div>
+          </div>
+          
+          <div class="relative pl-8">
+            <div class="absolute -left-4 top-0 w-8 h-8 rounded-full timeline-dot"></div>
+            <div class="card p-6">
+              <div class="flex justify-between flex-wrap">
+                <h3 class="text-xl font-semibold text-primary">Production Intern</h3>
+                <span class="text-accent font-medium">Jun 2020 - Des 2021</span>
+              </div>
+              <p class="text-graytext font-semibold mb-2">PT Mandom Indonesia Tbk</p>
+              <p class="text-graytext">
+                Mengoperasikan mesin sesuai SOP, memeriksa kualitas produk, menjaga kebersihan dan keamanan kerja, serta memantau dan mencatat proses produksi.
+              </p>
+            </div>
+          </div>
+          
+          <div class="relative pl-8">
+            <div class="absolute -left-4 top-0 w-8 h-8 rounded-full timeline-dot"></div>
+            <div class="card p-6">
+              <div class="flex justify-between flex-wrap">
+                <h3 class="text-xl font-semibold text-primary">Mahasiswa</h3>
+                <span class="text-accent font-medium">2024 - Sekarang</span>
+              </div>
+              <p class="text-graytext font-semibold mb-2">Teknologi Informatika</p>
+              <p class="text-graytext">
+                Mempelajari pengembangan web dan aplikasi, dengan proyek termasuk e-commerce, website informasi, dan aplikasi pertemuan komunitas (Sitemu).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-padding bg-light">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-display text-primary font-bold mb-4 section-title">Hubungi Saya</h2>
+        <p class="text-graytext max-w-2xl mx-auto mt-4">Saya terbuka untuk peluang kerja dan kolaborasi. Silakan hubungi saya melalui form berikut</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-graytext mb-2">Nama Lengkap</label>
+                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg" placeholder="Nama Anda">
+              </div>
+              <div>
+                <label for="email" class="block text-graytext mb-2">Email</label>
+                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg" placeholder="email@example.com">
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-graytext mb-2">Subjek</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg" placeholder="Subjek pesan">
+            </div>
+            <div>
+              <label for="message" class="block text-graytext mb-2">Pesan</label>
+              <textarea id="message" rows="6" class="w-full px-4 py-3 rounded-lg" placeholder="Tulis pesan Anda..."></textarea>
+            </div>
+            <button type="submit" class="bg-primary text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-accent transition">Kirim Pesan</button>
+          </form>
+        </div>
+        
+        <div>
+          <div class="card p-8 h-full">
+            <h3 class="text-xl font-semibold mb-6 text-primary">Informasi Kontak</h3>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="bg-primary p-3 rounded-full mr-4 text-white">
+                  <i class="fas fa-map-marker-alt text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 text-primary">Lokasi</h4>
+                  <p class="text-graytext">Bekasi, Indonesia</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-primary p-3 rounded-full mr-4 text-white">
+                  <i class="fas fa-envelope text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 text-primary">Email</h4>
+                  <p class="text-graytext">tasyazesica05@gmail.com</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-primary p-3 rounded-full mr-4 text-white">
+                  <i class="fas fa-phone text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 text-primary">Telepon</h4>
+                  <p class="text-graytext">+62 82377946665</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-primary p-3 rounded-full mr-4 text-white">
+                  <i class="fab fa-linkedin-in text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 text-primary">LinkedIn</h4>
+                  <p class="text-graytext">linkedin.com/in/tasyazesica</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-12">
+              <h4 class="font-semibold mb-4 text-primary">Ikuti Saya</h4>
+              <div class="flex gap-4">
+                <a href="#" class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-accent transition">
+                  <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="#" class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-accent transition">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-accent transition">
+                  <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-accent transition">
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-accent text-white py-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h3 class="text-2xl font-display font-bold">Tasya S</h3>
+          <p class="text-gray-200">COOK 3 & Mahasiswa Teknologi Informatika</p>
+        </div>
+        <div>
+          <p class="text-gray-200">&copy; 2023 Portfolio Tasya. Hak Cipta Dilindungi.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
